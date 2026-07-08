@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from app.core.config import settings
+from app.core.response import success_response
 
 app = FastAPI(
     title=settings.app_name,
@@ -10,6 +11,9 @@ app = FastAPI(
 
 
 @app.get("/", tags=["Root"])
-def root() -> dict[str, str]:
+def root():
     """Health check endpoint."""
-    return {"message": f"Welcome to {settings.app_name}"}
+    return success_response(
+        message=f"Welcome to {settings.app_name}",
+        data=None,
+    )
