@@ -1,6 +1,9 @@
 from collections import defaultdict
 
-from app.modules.transactions.models import Transaction, TransactionType
+from app.modules.transactions.models import (
+    Transaction,
+    TransactionType,
+)
 
 
 class PortfolioCalculator:
@@ -12,24 +15,71 @@ class PortfolioCalculator:
     ) -> list[dict]:
         """Calculate current holdings."""
 
-        holdings = defaultdict(float)
+        holdings = defaultdict(
+            lambda: {
+                "quantity": 0,
+                "total_invested": 0,
+            }
+        )
 
         for transaction in transactions:
+
+            symbol = transaction.asset_symbol
+
             if transaction.type == TransactionType.BUY:
-                holdings[transaction.asset_symbol] += (
+
+                holdings[symbol]["quantity"] += (
                     transaction.quantity
+                )
+
+                holdings[symbol]["total_invested"] += (
+                    transaction.quantity
+                    * transaction.price
+                    + transaction.fee
                 )
 
             elif transaction.type == TransactionType.SELL:
-                holdings[transaction.asset_symbol] -= (
+
+                current_quantity = (
+                    holdings[symbol]["quantity"]
+                )
+
+                if current_quantity <= 0:
+                    continue
+
+                average_price = (
+                    holdings[symbol]["total_invested"]
+                    / current_quantity
+                )
+
+                holdings[symbol]["quantity"] -= (
                     transaction.quantity
                 )
 
-        return [
-            {
-                "asset_symbol": symbol,
-                "quantity": quantity,
-            }
-            for symbol, quantity in holdings.items()
-            if quantity > 0
-        ]
+                holdings[symbol]["total_invested"] -= (
+                    average_price
+                    * transaction.quantity
+                )
+
+        result = []
+
+        for symbol, data in holdings.items():
+
+            if data["quantity"] <= 0:
+                continue
+
+            average_price = (
+                data["total_invested"]
+                / data["quantity"]
+            )
+
+            result.append(
+                {
+                    "asset_symbol": symbol,
+                    "quantity": data["quantity"],
+                    "total_invested": data["total_invested"],
+                    "average_buy_price": average_price,
+                }
+            )
+
+        return result

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status
 
+from app.core.response import success_response
 from app.modules.transactions.schemas import (
     CreateTransactionRequest,
-    TransactionResponse,
 )
 from app.modules.transactions.service import TransactionService
 
@@ -16,19 +16,18 @@ router = APIRouter(
 service = TransactionService()
 
 
-@router.get(
-    "",
-    response_model=list[dict],
-)
+@router.get("")
 def get_transactions():
     """Return all transactions."""
 
-    return service.get_transactions()
+    return success_response(
+        data=service.get_transactions(),
+        message="Transactions retrieved successfully",
+    )
 
 
 @router.post(
     "",
-    response_model=dict,
     status_code=status.HTTP_201_CREATED,
 )
 def create_transaction(
@@ -36,4 +35,8 @@ def create_transaction(
 ):
     """Create a new transaction."""
 
-    return service.create_transaction(request)
+    return success_response(
+        data=service.create_transaction(request),
+        message="Transaction created successfully",
+        status_code=status.HTTP_201_CREATED,
+    )

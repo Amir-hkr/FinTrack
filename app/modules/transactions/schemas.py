@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from app.modules.transactions.models import TransactionType
 
@@ -32,6 +32,16 @@ class CreateTransactionRequest(BaseModel):
         default="",
         max_length=200,
     )
+
+    @field_validator("asset_symbol")
+    @classmethod
+    def validate_symbol(
+        cls,
+        value: str,
+    ) -> str:
+        """Normalize asset symbol."""
+
+        return value.strip().upper()
 
 
 class TransactionResponse(BaseModel):

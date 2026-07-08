@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.modules.portfolio.schemas import PortfolioItemResponse
+from app.core.response import success_response
 from app.modules.portfolio.service import PortfolioService
 
 
@@ -13,11 +13,11 @@ router = APIRouter(
 service = PortfolioService()
 
 
-@router.get(
-    "",
-    response_model=list[PortfolioItemResponse],
-)
+@router.get("")
 def get_portfolio():
     """Return current portfolio."""
 
-    return service.get_portfolio()
+    return success_response(
+        data=service.get_portfolio(),
+        message="Portfolio retrieved successfully",
+    )

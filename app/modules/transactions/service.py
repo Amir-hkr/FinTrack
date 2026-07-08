@@ -1,7 +1,10 @@
 from fastapi import HTTPException, status
 
 from app.modules.assets.repository import AssetRepository
-from app.modules.transactions.models import Transaction
+from app.modules.transactions.models import (
+    Transaction,
+    TransactionType,
+)
 from app.modules.transactions.repository import TransactionRepository
 from app.modules.transactions.schemas import CreateTransactionRequest
 
@@ -44,6 +47,28 @@ class TransactionService:
             for transaction in transactions
         ]
 
+    def _get_current_quantity(
+        self,
+        symbol: str,
+    ) -> float:
+        """Calculate current asset quantity."""
+
+        transactions = self._repository.get_all()
+
+        quantity = 0
+
+        for transaction in transactions:
+            if transaction.asset_symbol != symbol.upper():
+                continue
+
+            if transaction.type == TransactionType.BUY:
+                quantity += transaction.quantity
+
+            elif transaction.type == TransactionType.SELL:
+                quantity -= transaction.quantity
+
+        return quantity
+
     def create_transaction(
         self,
         request: CreateTransactionRequest,
@@ -59,6 +84,21 @@ class TransactionService:
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Asset '{request.asset_symbol.upper()}' not found.",
             )
+
+        if request.type == TransactionType.SELL:
+
+            current_quantity = self._get_current_quantity(
+                request.asset_symbol
+            )
+
+            if request.quantity > current_quantity:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=(
+                        f"Insufficient "
+                        f"{request.asset_symbol.upper()} balance."
+                    ),
+                )
 
         transaction = self._repository.create(
             asset_symbol=request.asset_symbol,
