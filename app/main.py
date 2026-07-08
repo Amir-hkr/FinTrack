@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.core.config import settings
-from app.core.response import success_response
+from app.modules.assets.api import router as assets_router
 
 app = FastAPI(
     title=settings.app_name,
@@ -11,9 +11,11 @@ app = FastAPI(
 
 
 @app.get("/", tags=["Root"])
-def root():
+def root() -> dict[str, str]:
     """Health check endpoint."""
-    return success_response(
-        message=f"Welcome to {settings.app_name}",
-        data=None,
-    )
+    return {
+        "message": f"Welcome to {settings.app_name}",
+    }
+
+
+app.include_router(assets_router)
