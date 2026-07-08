@@ -20,6 +20,17 @@ def get_assets():
     return service.get_assets()
 
 
+@router.get(
+    "/{symbol}",
+    response_model=AssetResponse,
+)
+def get_asset_by_symbol(
+    symbol: str,
+):
+    """Return asset by symbol."""
+    return service.get_asset_by_symbol(symbol)
+
+
 @router.post(
     "",
     response_model=AssetResponse,

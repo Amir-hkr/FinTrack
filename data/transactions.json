@@ -1,0 +1,32 @@
+[
+    {
+        "id": "dbf5ae4a-7a7c-436c-8e3a-be03ad5e2a45",
+        "asset_symbol": "BTC",
+        "type": "BUY",
+        "quantity": 0.5,
+        "price": 110000.0,
+        "fee": 10.0,
+        "created_at": "2026-07-08T15:07:15.324724",
+        "note": "First Bitcoin investment"
+    },
+    {
+        "id": "f255c7c2-0852-4e9d-bbd8-9bd3af66a3d1",
+        "asset_symbol": "BTC",
+        "type": "BUY",
+        "quantity": 0.5,
+        "price": 110000.0,
+        "fee": 10.0,
+        "created_at": "2026-07-08T15:07:16.025487",
+        "note": "First Bitcoin investment"
+    },
+    {
+        "id": "e5dd5885-7d90-4791-a652-73529c03404c",
+        "asset_symbol": "ETH",
+        "type": "BUY",
+        "quantity": 2.0,
+        "price": 3000.0,
+        "fee": 5.0,
+        "created_at": "2026-07-08T15:12:35.382733",
+        "note": "Bought Ethereum"
+    }
+]

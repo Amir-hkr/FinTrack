@@ -1,110 +1,14 @@
 [
     {
-        "id": "36ee1e79-3f4e-4938-be28-96074064fe24",
+        "id": "c7b719fd-3b75-42d3-9b9b-761892aff91a",
         "name": "Bitcoin",
         "symbol": "BTC",
         "category": "Crypto"
     },
     {
-        "id": "58b4b44c-ba83-489a-9dfc-1abdedee14a5",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "7f4433da-0156-4f05-9313-8be8cbce7356",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "cdc20b94-2f79-4589-97a6-72d759709fa6",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "7620dd72-4133-4998-9a9a-1260b43aef69",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "4d3d5fb6-ad82-44a7-8d70-312089806aa7",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "d2414744-16d8-4522-a1b6-13fa7bd7cec4",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "e4d96177-34de-476a-a0b4-763c5eb48c78",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "b3ab5b20-7ffb-47e2-84f8-214a5587a365",
-        "name": "string",
-        "symbol": "STRING",
-        "category": "string"
-    },
-    {
-        "id": "19277f4c-b0c0-48f3-8d76-b436de47da35",
-        "name": "string",
-        "symbol": "STRING",
-        "category": "string"
-    },
-    {
-        "id": "884eaccd-b767-4ef7-8133-02e08bae2d20",
-        "name": "string",
-        "symbol": "STRING",
-        "category": "string"
-    },
-    {
-        "id": "85672428-0d0a-4008-8441-66fd55cf9444",
-        "name": "string",
-        "symbol": "STRING",
-        "category": "string"
-    },
-    {
-        "id": "f1b1ddf1-2153-47fe-982a-ce65017da8ef",
-        "name": "string",
-        "symbol": "STRING",
-        "category": "string"
-    },
-    {
-        "id": "e652b84c-39cc-45ea-bc38-5cf26744bbc7",
-        "name": "string",
-        "symbol": "STRING",
-        "category": "string"
-    },
-    {
-        "id": "d0427e8c-1efe-4d45-a401-3c69d8d03630",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "2f969b95-0025-45a0-9ac5-b9fd727da9a6",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "7dde6f36-2885-4baa-b959-550d4d8afe7e",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "category": "Crypto"
-    },
-    {
-        "id": "672cba37-b617-451a-8f70-448ad8ae0a80",
-        "name": "Bitcoin",
-        "symbol": "BTC",
+        "id": "4fc39389-1a63-462c-98e4-d6d691806671",
+        "name": "Ethereum",
+        "symbol": "ETH",
         "category": "Crypto"
     }
 ]
