@@ -1,23 +1,27 @@
 from fastapi import APIRouter
 
-from app.core.response import success_response
 from app.modules.portfolio.service import PortfolioService
 
 
 router = APIRouter(
     prefix="/portfolio",
-    tags=["Portfolio"],
+    tags=["Portfolio"]
 )
 
 
-service = PortfolioService()
+portfolio_service = PortfolioService()
 
 
 @router.get("")
-def get_portfolio():
-    """Return current portfolio."""
+async def get_portfolio():
+    """
+    Get current portfolio with live market prices.
+    """
 
-    return success_response(
-        data=service.get_portfolio(),
-        message="Portfolio retrieved successfully",
-    )
+    data = await portfolio_service.get_portfolio()
+
+    return {
+        "success": True,
+        "message": "Portfolio retrieved successfully",
+        "data": data,
+    }

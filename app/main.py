@@ -5,14 +5,22 @@ from app.modules.assets.api import router as assets_router
 from app.modules.portfolio.api import router as portfolio_router
 from app.modules.market.api import router as market_router
 from app.modules.analytics.api import router as analytics_router
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
     description=settings.app_description,
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/", tags=["Root"])
 def root() -> dict[str, str]:

@@ -1,4 +1,6 @@
 from app.modules.market.repository import MarketRepository
+from app.modules.market.service import MarketService
+
 from app.modules.portfolio.calculator import PortfolioCalculator
 from app.modules.transactions.repository import TransactionRepository
 
@@ -11,8 +13,8 @@ class PortfolioService:
         self._market_repository = MarketRepository()
         self._calculator = PortfolioCalculator()
 
-    def get_portfolio(self) -> list[dict]:
-        """Return current portfolio."""
+    async def get_portfolio(self) -> list[dict]:
+        """Return current portfolio with live prices."""
 
         transactions = self._transaction_repository.get_all()
 
@@ -23,15 +25,28 @@ class PortfolioService:
         result = []
 
         for item in portfolio:
-            market_price = self._market_repository.get_by_symbol(
-                item["asset_symbol"]
+
+            symbol = item["asset_symbol"]
+
+            # دریافت قیمت واقعی از CoinGecko
+            current_price = await MarketService.get_price(
+                symbol
             )
 
-            current_price = (
-                market_price.price
-                if market_price
-                else 0
-            )
+            # اگر API جواب نداد، از دیتابیس بخوان
+            if current_price is None:
+
+                market_price = (
+                    self._market_repository.get_by_symbol(
+                        symbol
+                    )
+                )
+
+                current_price = (
+                    market_price.price
+                    if market_price
+                    else 0
+                )
 
             current_value = (
                 item["quantity"]

@@ -12,7 +12,6 @@ router = APIRouter(
     tags=["Transactions"],
 )
 
-
 service = TransactionService()
 
 
@@ -39,4 +38,18 @@ def create_transaction(
         data=service.create_transaction(request),
         message="Transaction created successfully",
         status_code=status.HTTP_201_CREATED,
+    )
+
+
+@router.delete("/{transaction_id}")
+def delete_transaction(
+    transaction_id: str,
+):
+    """Delete transaction."""
+
+    service.delete_transaction(transaction_id)
+
+    return success_response(
+        data=None,
+        message="Transaction deleted successfully",
     )

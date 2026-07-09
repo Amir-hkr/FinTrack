@@ -110,3 +110,19 @@ class TransactionService:
         )
 
         return self._to_response(transaction)
+
+    def delete_transaction(
+        self,
+        transaction_id: str,
+    ) -> None:
+        """Delete transaction."""
+
+        deleted = self._repository.delete(
+            transaction_id
+        )
+
+        if not deleted:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Transaction not found.",
+            )

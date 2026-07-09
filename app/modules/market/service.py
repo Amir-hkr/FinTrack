@@ -1,40 +1,49 @@
-from app.modules.market.models import MarketPrice
-from app.modules.market.repository import MarketRepository
+import httpx
+
+
+COINGECKO_URL = "https://api.coingecko.com/api/v3/simple/price"
+
+
+COIN_MAP = {
+    "BTC": "bitcoin",
+    "ETH": "ethereum",
+    "SOL": "solana",
+    "ADA": "cardano",
+}
 
 
 class MarketService:
-    """Business logic for market prices."""
 
-    def __init__(self) -> None:
-        self._repository = MarketRepository()
+    @staticmethod
+    async def get_price(symbol: str):
 
-    def get_prices(self) -> list[MarketPrice]:
-        """Return all market prices."""
+        coin_id = COIN_MAP.get(symbol.upper())
 
-        return self._repository.get_all()
+        if not coin_id:
+            return None
 
-    def get_price(
-        self,
-        symbol: str,
-    ) -> MarketPrice | None:
-        """Return price by symbol."""
+        params = {
+            "ids": coin_id,
+            "vs_currencies": "usd",
+        }
 
-        return self._repository.get_by_symbol(
-            symbol
-        )
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    COINGECKO_URL,
+                    params=params,
+                    timeout=10,
+                )
 
-    def update_price(
-        self,
-        symbol: str,
-        price: float,
-    ) -> MarketPrice:
-        """Create or update market price."""
+            data = response.json()
+            print(data)
+            # اگر CoinGecko خطا داد
+            if coin_id not in data:
+                return None
 
-        market_price = MarketPrice(
-            symbol=symbol.upper(),
-            price=price,
-        )
+            return data.get(coin_id, {}).get("usd")
 
-        return self._repository.save(
-            market_price
-        )
+        
+        except Exception as e:
+            print("MARKET ERROR:", e)
+            return None

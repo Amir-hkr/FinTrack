@@ -4,7 +4,10 @@ from datetime import datetime
 from pathlib import Path
 from uuid import uuid4
 
-from app.modules.transactions.models import Transaction, TransactionType
+from app.modules.transactions.models import (
+    Transaction,
+    TransactionType,
+)
 
 
 class TransactionRepository:
@@ -78,6 +81,27 @@ class TransactionRepository:
 
         return transaction
 
+    def delete(
+        self,
+        transaction_id: str,
+    ) -> bool:
+        """Delete transaction by id."""
+
+        transactions = self.get_all()
+
+        filtered_transactions = [
+            transaction
+            for transaction in transactions
+            if transaction.id != transaction_id
+        ]
+
+        if len(filtered_transactions) == len(transactions):
+            return False
+
+        self._save(filtered_transactions)
+
+        return True
+
     def _save(
         self,
         transactions: list[Transaction],
@@ -89,7 +113,9 @@ class TransactionRepository:
         for transaction in transactions:
             item = asdict(transaction)
             item["type"] = transaction.type.value
-            item["created_at"] = transaction.created_at.isoformat()
+            item["created_at"] = (
+                transaction.created_at.isoformat()
+            )
             data.append(item)
 
         with self._file_path.open(

@@ -7,10 +7,10 @@ class AnalyticsService:
     def __init__(self) -> None:
         self._portfolio_service = PortfolioService()
 
-    def get_summary(self) -> dict:
+    async def get_summary(self) -> dict:
         """Return portfolio summary."""
 
-        portfolio = self._portfolio_service.get_portfolio()
+        portfolio = await self._portfolio_service.get_portfolio()
 
         total_invested = sum(
             item["total_invested"]
