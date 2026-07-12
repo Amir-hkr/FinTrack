@@ -1,7 +1,10 @@
 <p align="center">
   <img src="banner.png" alt="FinTrack Banner" width="100%">
 </p>
+
 ---------------
+
+
 # 🚀 FinTrack
 
 A modular investment portfolio management platform built with **FastAPI** and **React**.
