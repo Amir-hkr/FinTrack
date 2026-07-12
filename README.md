@@ -78,7 +78,7 @@ FinTrack helps users manage digital assets, record transactions, track portfolio
 
 # 📂 Project Structure
 
-
+```bash
 FinTrack/
 ├── |── app/
 │   |   |
