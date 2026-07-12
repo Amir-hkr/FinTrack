@@ -124,7 +124,7 @@ FinTrack/
 │
 └── README.md
 
-
+```
 ---
 
 # ⚙️ Installation
