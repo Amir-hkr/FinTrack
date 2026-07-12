@@ -72,54 +72,48 @@ FinTrack helps users manage digital assets, record transactions, track portfolio
 # 📂 Project Structure
 
 
-FinTrack
+FinTrack/
+├── |── app/
+│   |   |
+│   │   ├── core/
+│   │   │   └── configuration/
+│   │   │
+│   │   ├── modules/
+│   │   │   ├── assets/
+│   │   │   │   ├── api.py
+│   │   │   │   ├── service.py
+│   │   │   │   ├── repository.py
+│   │   │   │   ├── models.py
+│   │   │   │   └── schemas.py
+│   │   │   │
+│   │   │   ├── transactions/
+│   │   │   │   ├── api.py
+│   │   │   │   ├── service.py
+│   │   │   │   ├── repository.py
+│   │   │   │   ├── models.py
+│   │   │   │   └── schemas.py
+│   │   │   │
+│   │   │   ├── portfolio/
+│   │   │   │
+│   │   │   └── analytics/
+│   │   │
+│   │   └── main.py
+│   │
+│   └── data/
+│       ├── assets.json
+│       └── transactions.json
 │
-├── backend
-│ │
-│ ├── app
-│ │ ├── core
-│ │ │ └── configuration
-│ │ │
-│ │ ├── modules
-│ │ │ │
-│ │ │ ├── assets
-│ │ │ │ ├── api.py
-│ │ │ │ ├── service.py
-│ │ │ │ ├── repository.py
-│ │ │ │ ├── models.py
-│ │ │ │ └── schemas.py
-│ │ │ │
-│ │ │ ├── transactions
-│ │ │ │ ├── api.py
-│ │ │ │ ├── service.py
-│ │ │ │ ├── repository.py
-│ │ │ │ ├── models.py
-│ │ │ │ └── schemas.py
-│ │ │ │
-│ │ │ ├── portfolio
-│ │ │ │
-│ │ │ ├── analytics
-│ │ │
-│ │ └── main.py
-│ │
-│ └── data
-│ ├── assets.json
-│ └── transactions.json
-│
-│
-├── frontend
-│ │
-│ ├── src
-│ │ │
-│ │ ├── api
-│ │ ├── components
-│ │ ├── pages
-│ │ ├── routes
-│ │ ├── types
-│ │ └── App.tsx
-│ │
-│ ├── package.json
-│ └── vite.config.ts
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── types/
+│   │   └── App.tsx
+│   │
+│   ├── package.json
+│   └── vite.config.ts
 │
 └── README.md
 
